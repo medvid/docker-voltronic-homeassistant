@@ -20,9 +20,9 @@ input_select:
 # sensor template for warnings
   - platform: template
     sensors:
-      mpp_warning_verbose:
+      voltronic_warning_verbose:
         value_template: >-
-          {% set warnings = states('sensor.warnings') | float(0) %}
+          {% set warnings = states('sensor.voltronic_warnings') | float(0) %}
 
           {% if warnings == 0 %}
             No error
@@ -100,9 +100,6 @@ input_select:
 ==========================================
 # Automations of Solar PV Inverter (such as when to charge batteries off grid / from PV etc)...
 # This will automatically fire off the event to the inverter when changed in the UI.
-
-# mpp_92331908103079 need to be changed with what you have in mqtt.json (devicename_serial)
-
 automation:
 - id: 'set_solar_output_source'
   alias: Solar Trigger Output Source Change
@@ -112,7 +109,7 @@ automation:
   action:
     service: mqtt.publish
     data_template:
-      topic: homeassistant/sensor/mpp_92331908103079/COMMANDS
+      topic: homeassistant/sensor/voltronic
       payload: >
         {% if is_state("input_select.solar_output_source_priority", "POP00 (Utility first)") %}
           POP00
@@ -130,7 +127,7 @@ automation:
   action:
     service: mqtt.publish
     data_template:
-      topic: homeassistant/sensor/mpp_92331908103079/COMMANDS
+      topic: homeassistant/sensor/voltronic
       payload: >
         {% if is_state("input_select.solar_charger_priority", "PCP00 (Utility first)") %}
           PCP00
@@ -179,7 +176,7 @@ automation:
 
 
 - id: '1651914736932'
-  alias: MPP - Setting max charging current
+  alias: Voltronic - Setting max charging current
   description: ''
   trigger:
   - platform: state
@@ -189,7 +186,7 @@ automation:
   action:
   - service: mqtt.publish
     data:
-      topic: homeassistant/sensor/mpp_92331908103079/COMMANDS
+      topic: homeassistant/sensor/voltronic
       payload: "{% if is_state(\"input_select.setting_max_charging_current\", \"010\"\
         ) %}\n  MNCHGC010\n{% elif is_state(\"input_select.setting_max_charging_current\"\
         , \"020\") %}\n  MNCHGC020\n{% elif is_state(\"input_select.setting_max_charging_current\"\
@@ -205,7 +202,7 @@ automation:
         , \"120\") %}\n  MNCHGC120\n{% endif %}\n"
   mode: single
 - id: '1651915273804'
-  alias: MPP - Setting utility max charging current
+  alias: Voltronic - Setting utility max charging current
   description: ''
   trigger:
   - platform: state
@@ -215,7 +212,7 @@ automation:
   action:
   - service: mqtt.publish
     data:
-      topic: homeassistant/sensor/mpp_92331908103079/COMMANDS
+      topic: homeassistant/sensor/voltronic
       payload: "{% if is_state(\"input_select.setting_utility_max_charging_current\"\
         , \"002\") %}\n  MUCHGC002\n{% elif is_state(\"input_select.setting_utility_max_charging_current\"\
         , \"010\") %}\n  MUCHGC010\n{% elif is_state(\"input_select.setting_utility_max_charging_current\"\
@@ -226,7 +223,7 @@ automation:
         , \"060\") %}\n  MUCHGC060\n{% endif %}\n"
   mode: single
 - id: '1651916554603'
-  alias: MPP - Setting battery FV
+  alias: Voltronic - Setting battery FV
   description: ''
   trigger:
   - platform: state
@@ -236,7 +233,7 @@ automation:
   action:
   - service: mqtt.publish
     data:
-      topic: homeassistant/sensor/mpp_92331908103079/COMMANDS
+      topic: homeassistant/sensor/voltronic
       payload: "{% if is_state(\"input_select.setting_battery_fv\", \"27.0\") %}\n\
         \  PBFT27.0\n{% elif is_state(\"input_select.setting_battery_fv\", \"27.1\"\
         ) %}\n  PBFT27.1\n{% elif is_state(\"input_select.setting_battery_fv\", \"\
@@ -253,7 +250,7 @@ automation:
         , \"28.2\") %}\n  PBFT28.2\n{% endif %}\n"
   mode: single
 - id: '1651924381875'
-  alias: MPP - Set battery re-charge voltage
+  alias: Voltronic - Set battery re-charge voltage
   description: ''
   trigger:
   - platform: state
@@ -263,7 +260,7 @@ automation:
   action:
   - service: mqtt.publish
     data:
-      topic: homeassistant/sensor/mpp_92331908103079/COMMANDS
+      topic: homeassistant/sensor/voltronic
       payload: "{% if is_state(\"input_select.set_battery_re_charge_voltage\", \"\
         22.0\") %}\n  PBCV22.0\n{% elif is_state(\"input_select.set_battery_re_charge_voltage\"\
         , \"22.5\") %}\n  PBCV22.5\n{% elif is_state(\"input_select.set_battery_re_charge_voltage\"\
@@ -275,7 +272,7 @@ automation:
         , \"25.5\") %}\n  PBCV25.5\n{% endif %}\n"
   mode: single
 - id: '1651924876395'
-  alias: MPP - Setting battery cut-off voltage
+  alias: Voltronic - Setting battery cut-off voltage
   description: ''
   trigger:
   - platform: state
@@ -285,7 +282,7 @@ automation:
   action:
   - service: mqtt.publish
     data:
-      topic: homeassistant/sensor/mpp_92331908103079/COMMANDS
+      topic: homeassistant/sensor/voltronic
       payload: "{% if is_state(\"input_select.setting_battery_cut_off_voltage\", \"\
         22.0\") %}\n  PSDV22.0\n{% elif is_state(\"input_select.setting_battery_cut_off_voltage\"\
         , \"22.5\") %}\n  PSDV22.5\n{% elif is_state(\"input_select.setting_battery_cut_off_voltage\"\
@@ -296,7 +293,7 @@ automation:
         , \"21.5\") %}\n  PSDV21.5\n{% endif %}\n"
   mode: single
 - id: '1651925389937'
-  alias: MPP - Set battery re-discharge voltage
+  alias: Voltronic - Set battery re-discharge voltage
   description: ''
   trigger:
   - platform: state
@@ -306,7 +303,7 @@ automation:
   action:
   - service: mqtt.publish
     data:
-      topic: homeassistant/sensor/mpp_92331908103079/COMMANDS
+      topic: homeassistant/sensor/voltronic
       payload: "{% if is_state(\"input_select.set_battery_re_discharge_voltage\",\
         \ \"00.0\") %}\n  PBDV00.0\n  {% elif is_state(\"input_select.set_battery_re_discharge_voltage\"\
         , \"24.0\") %}\n  PBDV24.0\n  {% elif is_state(\"input_select.set_battery_re_discharge_voltage\"\
@@ -321,7 +318,7 @@ automation:
         , \"29.0\") %}\n  PBDV29.0\n{% endif %}\n"
   mode: single
 - id: '1651926072242'
-  alias: MPP - Setting battery C.V.
+  alias: Voltronic - Setting battery C.V.
   description: ''
   trigger:
   - platform: state
@@ -331,7 +328,7 @@ automation:
   action:
   - service: mqtt.publish
     data:
-      topic: homeassistant/sensor/mpp_92331908103079/COMMANDS
+      topic: homeassistant/sensor/voltronic
       payload: "{% if is_state(\"input_select.setting_battery_c_v\", \"28.1\") %}\n\
         \  PCVV28.1\n  {% elif is_state(\"input_select.setting_battery_c_v\", \"28.2\"\
         ) %}\n  PCVV28.2\n  {% elif is_state(\"input_select.setting_battery_c_v\"\

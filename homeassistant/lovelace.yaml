@@ -51,57 +51,57 @@ views:
         title: null
         type: vertical-stack
       - entities:
-          - entity: sensor.pv_in_watts
-          - entity: sensor.pv_in_current
-          - entity: sensor.pv_in_voltage
-          - entity: sensor.battery_charge_current
-          - entity: sensor.battery_discharge_current
-          - entity: sensor.battery_voltage
-          - entity: sensor.battery_capacity
-          - entity: sensor.load_watt
-          - entity: sensor.load_va
-          - entity: sensor.load_pct
-          - entity: sensor.heatsink_temperature
-          - entity: sensor.scc_voltage
-          - entity: sensor.bus_voltage
-          - entity: sensor.ac_grid_voltage
-          - entity: sensor.ac_out_voltage
-          - entity: sensor.ac_grid_frequency
-          - entity: sensor.ac_out_frequency
+          - entity: sensor.voltronic_pv_in_watts
+          - entity: sensor.voltronic_pv_in_current
+          - entity: sensor.voltronic_pv_in_voltage
+          - entity: sensor.voltronic_battery_charge_current
+          - entity: sensor.voltronic_battery_discharge_current
+          - entity: sensor.voltronic_battery_voltage
+          - entity: sensor.voltronic_battery_capacity
+          - entity: sensor.voltronic_load_watt
+          - entity: sensor.voltronic_load_va
+          - entity: sensor.voltronic_load_pct
+          - entity: sensor.voltronic_heatsink_temperature
+          - entity: sensor.voltronic_scc_voltage
+          - entity: sensor.voltronic_bus_voltage
+          - entity: sensor.voltronic_ac_grid_voltage
+          - entity: sensor.voltronic_ac_out_voltage
+          - entity: sensor.voltronic_ac_grid_frequency
+          - entity: sensor.voltronic_ac_out_frequency
         show_header_toggle: false
         type: entities
       - entities:
-          - entity: sensor.inverter_mode
+          - entity: sensor.voltronic_inverter_mode
             secondary_info: last-changed
-          - entity: sensor.charger_source_priority
+          - entity: sensor.voltronic_charger_source_priority
             secondary_info: last-changed
-          - entity: sensor.out_source_priority
+          - entity: sensor.voltronic_out_source_priority
             secondary_info: last-changed
-          - entity: sensor.load_status_on
+          - entity: sensor.voltronic_load_status_on
             secondary_info: last-changed
-          - entity: sensor.ac_charge_on
+          - entity: sensor.voltronic_ac_charge_on
             secondary_info: last-changed
-          - entity: sensor.scc_charge_on
+          - entity: sensor.voltronic_scc_charge_on
             secondary_info: last-changed
-          - entity: sensor.battery_bulk_voltage
+          - entity: sensor.voltronic_battery_bulk_voltage
             secondary_info: last-changed
-          - entity: sensor.battery_float_voltage
+          - entity: sensor.voltronic_battery_float_voltage
             secondary_info: last-changed
-          - entity: sensor.battery_recharge_voltage
+          - entity: sensor.voltronic_battery_recharge_voltage
             secondary_info: last-changed
-          - entity: sensor.battery_redischarge_voltage
+          - entity: sensor.voltronic_battery_redischarge_voltage
             secondary_info: last-changed
-          - entity: sensor.battery_under_voltage
+          - entity: sensor.voltronic_battery_under_voltage
             secondary_info: last-changed
-          - entity: sensor.max_charge_current
+          - entity: sensor.voltronic_max_charge_current
             secondary_info: last-changed
-          - entity: sensor.max_grid_charge_current
+          - entity: sensor.voltronic_max_grid_charge_current
             secondary_info: last-changed
-          - entity: sensor.mpp_commands
+          - entity: sensor.voltronic_commands
             secondary_info: last-changed
           - entity: sensor.warnings
             secondary_info: last-changed
-          - entity: sensor.mpp_warning_verbose
+          - entity: sensor.voltronic_warning_verbose
         show_header_toggle: false
         type: entities
       - type: entities
@@ -121,5 +121,5 @@ views:
           - entity: input_select.setting_utility_max_charging_current
         state_color: true
     panel: false
-    path: mpp
-    title: MPP
+    path: voltronic
+    title: Voltronic
