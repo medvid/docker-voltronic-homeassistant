@@ -17,5 +17,5 @@ $UNBUFFER /opt/inverter-mqtt/mqtt-init.sh
 # the configuration on the inverter from home assistant).
 $UNBUFFER /opt/inverter-mqtt/mqtt-subscriber.sh &
 
-# Push poller updates every 30 seconds.
-while :; do $UNBUFFER /opt/inverter-mqtt/mqtt-push.sh; sleep 7; done
+# Push poller updates every 60 seconds.
+while :; do $UNBUFFER /opt/inverter-mqtt/mqtt-push.sh; sleep 60; done

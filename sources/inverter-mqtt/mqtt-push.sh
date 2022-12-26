@@ -30,7 +30,7 @@ pushMQTTData () {
             -i ""$MQTT_DEVICENAME"_"$MQTT_SERIAL"" \
             -t "$MQTT_TOPIC/sensor/"$MQTT_DEVICENAME"_$1" \
             -m "$2"
-    
+
         if [[ $INFLUX_ENABLED == "true" ]] ; then
             pushInfluxData "$1" "$2"
         fi
@@ -51,3 +51,7 @@ eval "declare -A INVERTER_DATA=($BASH_HASH)"
 for key in "${!INVERTER_DATA[@]}"; do
     pushMQTTData "$key" "${INVERTER_DATA[$key]}"
 done
+
+if [[ -f /etc/inverter/custom.py ]]; then
+    echo $POLLER_JSON | python3 /etc/inverter/custom.py
+fi
