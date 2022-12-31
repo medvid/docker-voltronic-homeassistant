@@ -68,7 +68,7 @@ void getSettingsFile(string filename) {
     try {
         string fileline, linepart1, linepart2;
         ifstream infile;
-        infile.open(filename);
+        infile.open(filename, ios::in);
         while(!infile.eof()) {
             getline(infile, fileline);
             size_t firstpos = fileline.find("#");
@@ -169,7 +169,7 @@ float batt_redischarge_voltage;
         settings = "/etc/inverter/inverter.conf";
     }
     getSettingsFile(settings);
-    int fd = open(settings, O_RDWR);
+    int fd = open(settings, O_RDONLY);
     while (flock(fd, LOCK_EX)) sleep(1);
 
     bool ups_status_changed(false);
